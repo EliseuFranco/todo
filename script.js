@@ -23,6 +23,7 @@ const user_entrance = document.querySelector(".task-content")
 const btn_close_add = document.getElementById("close_add")
 const task_description = document.querySelector("#description")
 const task_description_edit = document.getElementById("task-description-edit")
+const btn_delete_all = document.querySelector(".btn-all")
 
 
 
@@ -121,12 +122,15 @@ function checkTaskValidate(){
 
     if (totalTask > 0){
         alert_container.classList.add("visible")
-        alertBox.innerHTML = `${message} ${totalTask} por vencer`
+        alertBox.innerHTML += `${message} ${totalTask} por vencer`
 
         setTimeout(()=>{
             alert_container.classList.remove("visible")
         }, 5000)
     } 
+}
+function saveTasks(){
+    localStorage.setItem("task", JSON.stringify(tarefas))
 }
 // Carregar todos os alertas
 checkTaskValidate()
@@ -146,10 +150,12 @@ btn_add.addEventListener('click', ()=>{
             date: new Date().toJSON().slice(0,10)
         }
         tarefas.push(new_task)
-        localStorage.setItem("task", JSON.stringify(tarefas))
+        saveTasks()
+        // localStorage.setItem("task", JSON.stringify(tarefas))
         showTask(new_task)
         task.value = ''
         task_description.value =''
+        closeAddModal()
     }  else alert("Preencha todos os campos de entrada por favor!")
 })
 
@@ -201,7 +207,8 @@ task_container.addEventListener("click", (event)=>{
                 task_to_concludes.classList.toggle("concluir", task.concluded)
                 task_title_to_concludes.classList.toggle("concluir", task.concluded)  
             }
-            localStorage.setItem("task", JSON.stringify(tarefas))
+            saveTasks()
+            // localStorage.setItem("task", JSON.stringify(tarefas))
         })
     }
 })
@@ -214,7 +221,8 @@ btn_update.addEventListener("click", ()=>{
                     tarefa.description = task_description_edit.value
                 }
             })
-            localStorage.setItem("task", JSON.stringify(tarefas))
+            // localStorage.setItem("task", JSON.stringify(tarefas))
+            saveTasks()
             renderAlltask()
             closeModal()
             
@@ -255,4 +263,23 @@ user_entrance.addEventListener("click", (e) =>{
     if(e.target.classList.contains("user-container")){
         closeAddModal()
     }
+})
+
+btn_delete_all.addEventListener("click", ()=>{
+
+    if(tarefas.length !== 0){
+        const confirmation = confirm("Certeza que quer eliminar todas tarefas ?")
+        if(confirmation){
+            tarefas = []
+            saveTasks()
+            renderAlltask()
+        }
+    }
+    else{
+        alert("Sem tarefas para eliminar")
+    }
+})
+
+document.querySelector(".close-alert").addEventListener("click", ()=>{
+    alert_container.classList.remove("visible")
 })
