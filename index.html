@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Todo app</h1>
+        
+        <p id="mode">All your taskes here</p>
+    </header>
+    <div class="taskenter">
+        <div class="task-content">
+            <div class="add-button">
+                <abbr title="Adicionar tarefa"><button class="open-user-modal"><img src="plus.svg" alt="plus_icon" class="icon-plus"></button></abbr>
+                <div aria-label="Alternar modo escuro"><img src="moon.svg" alt="moon-image" id="moon"></div>
+            </div>
+
+            <div class="user-container">
+                <div class="user-entrance">
+                    <span style="cursor: pointer; font-size: 26px;" id="close_add">&times;</span>
+                    <input type="text" placeholder="Título da terefa" id="task">
+                    <textarea name="description" id="description" placeholder="Descreve a tua tarefa" rows="5" cols="10" required></textarea>
+                    <button class="add">Adicionar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section>
+        <div class="filters">
+            <div>
+                <label for="concluded">Concluídas</label>
+                <input type="radio" name="filter" id="concluded" class="filter">
+                <label for="unconcluded">Pendentes</label>
+                <input type="radio" name="filter" id="unconcluded" class="filter">
+                <label for="all">Todas</label>
+                <input type="radio" name="filter" id="all" class="filter">
+            </div>
+            <div>
+                <button class="btn-all"><img src="bin.svg" alt="bin-icon" class="icon-plus"></button>
+            </div>
+
+        </div>
+        <div class="task-list">
+        </div>
+    </section>
+
+    <div class="edit_container">
+        <div class="task_edit active">
+            <span class="close">&times;</span>
+            <input type="text" id="edit_task">
+            <textarea name="" id="task-description-edit" rows="5" cols="10" ></textarea>
+            <button id="atualizar"><img src='edit.svg' alt='edit-icon' class='action-icon'/> Update</button>
+        </div>
+    </div> 
+
+    <aside class="alert-container active">
+        <div class="alert">
+        </div>
+    </aside>
+
+<script src="script.js"></script>
+</body>
+</html>
